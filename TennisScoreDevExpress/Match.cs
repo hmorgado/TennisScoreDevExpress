@@ -93,15 +93,17 @@ namespace TennisScoreDevExpress
       fimDeJogo?.Invoke();
       _jogoEmAndamento = false;
     }
+
+    private bool placar6aXou7a5(Jogador vencedorDoGame)
+    {
+      Jogador oOutro = vencedorDoGame.numJogador == 1 ? jogador2 : jogador1;
+      return (vencedorDoGame.game == 6 && oOutro.game <= 4) ||
+        (vencedorDoGame.game == 7 && oOutro.game == 5);
+    }
     
     private void verificaGamesParaTBOuFimSet(Jogador vencedorDoGame)
     {
-      Jogador oOutro = vencedorDoGame.numJogador == 1 ? jogador2 : jogador1;
-
-      if (vencedorDoGame.game == 6 && oOutro.game <= 4)
-      {
-        finalizarJogo();
-      }
+      if (placar6aXou7a5(vencedorDoGame)) { finalizarJogo(); }
       if (placar6a6()) {
         foiParaTB = true;
         iniciaTB?.Invoke();
