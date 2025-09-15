@@ -28,8 +28,8 @@
     /// </summary>
     private void InitializeComponent()
     {
-      this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-      this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+      this.labelJogador2Nome = new DevExpress.XtraEditors.LabelControl();
+      this.labelJogador1Nome = new DevExpress.XtraEditors.LabelControl();
       this.labelPontoNadal = new DevExpress.XtraEditors.LabelControl();
       this.labelPontoFederer = new DevExpress.XtraEditors.LabelControl();
       this.labelGameNadal = new DevExpress.XtraEditors.LabelControl();
@@ -41,31 +41,31 @@
       this.labelTBJogador2 = new DevExpress.XtraEditors.LabelControl();
       this.SuspendLayout();
       // 
-      // labelControl1
+      // labelJogador2Nome
       // 
-      this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.labelControl1.Appearance.Options.UseFont = true;
-      this.labelControl1.Location = new System.Drawing.Point(292, 27);
-      this.labelControl1.Name = "labelControl1";
-      this.labelControl1.Size = new System.Drawing.Size(67, 33);
-      this.labelControl1.TabIndex = 0;
-      this.labelControl1.Text = "Nadal";
+      this.labelJogador2Nome.Appearance.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.labelJogador2Nome.Appearance.Options.UseFont = true;
+      this.labelJogador2Nome.Location = new System.Drawing.Point(320, 27);
+      this.labelJogador2Nome.Name = "labelJogador2Nome";
+      this.labelJogador2Nome.Size = new System.Drawing.Size(110, 33);
+      this.labelJogador2Nome.TabIndex = 0;
+      this.labelJogador2Nome.Text = "Jogador2";
       // 
-      // labelControl2
+      // labelJogador1Nome
       // 
-      this.labelControl2.Appearance.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.labelControl2.Appearance.Options.UseFont = true;
-      this.labelControl2.Location = new System.Drawing.Point(55, 27);
-      this.labelControl2.Name = "labelControl2";
-      this.labelControl2.Size = new System.Drawing.Size(91, 33);
-      this.labelControl2.TabIndex = 1;
-      this.labelControl2.Text = "Federer";
+      this.labelJogador1Nome.Appearance.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.labelJogador1Nome.Appearance.Options.UseFont = true;
+      this.labelJogador1Nome.Location = new System.Drawing.Point(20, 27);
+      this.labelJogador1Nome.Name = "labelJogador1Nome";
+      this.labelJogador1Nome.Size = new System.Drawing.Size(110, 33);
+      this.labelJogador1Nome.TabIndex = 1;
+      this.labelJogador1Nome.Text = "Jogador1";
       // 
       // labelPontoNadal
       // 
       this.labelPontoNadal.Appearance.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.labelPontoNadal.Appearance.Options.UseFont = true;
-      this.labelPontoNadal.Location = new System.Drawing.Point(320, 66);
+      this.labelPontoNadal.Location = new System.Drawing.Point(352, 66);
       this.labelPontoNadal.Name = "labelPontoNadal";
       this.labelPontoNadal.Size = new System.Drawing.Size(15, 33);
       this.labelPontoNadal.TabIndex = 2;
@@ -75,7 +75,7 @@
       // 
       this.labelPontoFederer.Appearance.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.labelPontoFederer.Appearance.Options.UseFont = true;
-      this.labelPontoFederer.Location = new System.Drawing.Point(86, 66);
+      this.labelPontoFederer.Location = new System.Drawing.Point(68, 66);
       this.labelPontoFederer.Name = "labelPontoFederer";
       this.labelPontoFederer.Size = new System.Drawing.Size(15, 33);
       this.labelPontoFederer.TabIndex = 3;
@@ -103,7 +103,7 @@
       // 
       // btnPontoJogador2
       // 
-      this.btnPontoJogador2.Location = new System.Drawing.Point(292, 105);
+      this.btnPontoJogador2.Location = new System.Drawing.Point(320, 105);
       this.btnPontoJogador2.Name = "btnPontoJogador2";
       this.btnPontoJogador2.Size = new System.Drawing.Size(75, 23);
       this.btnPontoJogador2.TabIndex = 6;
@@ -112,7 +112,7 @@
       // 
       // btnPontoJogador1
       // 
-      this.btnPontoJogador1.Location = new System.Drawing.Point(55, 105);
+      this.btnPontoJogador1.Location = new System.Drawing.Point(39, 105);
       this.btnPontoJogador1.Name = "btnPontoJogador1";
       this.btnPontoJogador1.Size = new System.Drawing.Size(75, 23);
       this.btnPontoJogador1.TabIndex = 7;
@@ -167,8 +167,8 @@
       this.Controls.Add(this.labelGameNadal);
       this.Controls.Add(this.labelPontoFederer);
       this.Controls.Add(this.labelPontoNadal);
-      this.Controls.Add(this.labelControl2);
-      this.Controls.Add(this.labelControl1);
+      this.Controls.Add(this.labelJogador1Nome);
+      this.Controls.Add(this.labelJogador2Nome);
       this.Name = "PlacarPrincipalForm1";
       this.Text = "Placar Principal";
       this.ResumeLayout(false);
@@ -178,8 +178,8 @@
 
     #endregion
 
-    private DevExpress.XtraEditors.LabelControl labelControl1;
-    private DevExpress.XtraEditors.LabelControl labelControl2;
+    private DevExpress.XtraEditors.LabelControl labelJogador2Nome;
+    private DevExpress.XtraEditors.LabelControl labelJogador1Nome;
     private DevExpress.XtraEditors.LabelControl labelPontoNadal;
     private DevExpress.XtraEditors.LabelControl labelPontoFederer;
     private DevExpress.XtraEditors.LabelControl labelGameNadal;

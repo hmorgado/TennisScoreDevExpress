@@ -6,8 +6,8 @@ namespace TennisScoreDevExpress
 {
   public partial class PlacarPrincipalForm1 : DevExpress.XtraEditors.XtraForm
   {
-    private static Jogador j1 = new Jogador("Federer", 1);
-    private static Jogador j2 = new Jogador("Nadal", 2);
+    private static Jogador j1 = new Jogador("Heitor", 1);
+    private static Jogador j2 = new Jogador("Cláudio", 2);
     private Match match = new Match(j1, j2);
 
     public PlacarPrincipalForm1()
@@ -37,6 +37,9 @@ namespace TennisScoreDevExpress
 
     private void atualizaPlacar()
     {
+      labelJogador1Nome.Text = j1.GetNome();
+      labelJogador2Nome.Text = j2.GetNome();
+      
       // jog 1
       labelGameFederer.Text = match.gameJogador1();
       labelPontoFederer.Text = match.pontoJogador1();
