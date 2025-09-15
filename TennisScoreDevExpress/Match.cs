@@ -9,10 +9,10 @@ namespace TennisScoreDevExpress
 {
   public class Match
   {
-    private Jogador jogador1 {  get; set; }
-    private Jogador jogador2 {  get; set; }
+    private Jogador jogador1 { get; set; }
+    private Jogador jogador2 { get; set; }
     private bool _jogoEmAndamento = true;
-    public bool foiParaTB = false;
+    private bool _foiParaTB = false;
     private Jogador sacador = null;
 
     //evento
@@ -27,6 +27,10 @@ namespace TennisScoreDevExpress
       this.jogador2 = jogador2;
     }
 
+    public bool getFoiParaTB()
+    {
+      return this._foiParaTB;
+    }
     public Jogador vencedor()
     {
       Jogador vencedor = null;
@@ -41,12 +45,10 @@ namespace TennisScoreDevExpress
     {
       return jogador1.GetGame().ToString();
     }
-
     public string gameJogador2()
     {
       return jogador2.GetGame().ToString();
     }
-
     public string tbPontoJogador1()
     {
       return jogador1.GetTBPonto().ToString();
@@ -102,7 +104,7 @@ namespace TennisScoreDevExpress
     {
       if (placar6aXou7a5(vencedorDoGame)) { finalizarJogo(); }
       if (placar6a6()) {
-        foiParaTB = true;
+        _foiParaTB = true;
         iniciaTB?.Invoke();
       }
     }

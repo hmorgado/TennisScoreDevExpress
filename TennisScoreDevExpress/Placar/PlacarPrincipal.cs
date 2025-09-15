@@ -6,9 +6,9 @@ namespace TennisScoreDevExpress
 {
   public partial class PlacarPrincipalForm1 : DevExpress.XtraEditors.XtraForm
   {
-    private static Jogador federer = new Jogador("Federer", 1);
-    private static Jogador nadal = new Jogador("Nadal", 2);
-    private Match match = new Match(federer, nadal);
+    private static Jogador j1 = new Jogador("Federer", 1);
+    private static Jogador j2 = new Jogador("Nadal", 2);
+    private Match match = new Match(j1, j2);
 
     public PlacarPrincipalForm1()
     {
@@ -16,6 +16,7 @@ namespace TennisScoreDevExpress
 
       // chama método atualizaPlacar DESTA CLASSE
       // quando game é vencido com Jogador j (vencedor) como param
+      atualizaPlacar();
       match.atualizaPlacar += atualizaPlacar;
       match.iniciaTB += iniciaTBForm;
       match.fimDeJogo += fimDeJogoForm;
@@ -47,7 +48,7 @@ namespace TennisScoreDevExpress
       btnPontoJogador1.Enabled = match.jogoEmAndamento();
       btnPontoJogador2.Enabled = match.jogoEmAndamento();
 
-      if (match.jogoFinalizado() && match.foiParaTB)
+      if (match.jogoFinalizado() && match.getFoiParaTB())
       {
         labelTBJogador1.Text = match.tbPontoJogador1();
         labelTBJogador2.Text = match.tbPontoJogador2();
@@ -59,6 +60,8 @@ namespace TennisScoreDevExpress
 
     private void btnPonto_Click(object sender, EventArgs e)
     {
+      //TODO passar jogador que marcou o ponto aqui ao invés do número
+      // ou passar o número do jogador através da propriedade numjogador
       SimpleButton obj = (SimpleButton)sender;
       match.jogadorXMarcarPonto(obj.Name == "btnPontoJogador1" ? 1 : 2);
     }
