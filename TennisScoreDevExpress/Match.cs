@@ -12,6 +12,8 @@ namespace TennisScoreDevExpress
     private Jogador jogador1 {  get; set; }
     private Jogador jogador2 {  get; set; }
     private bool _jogoEmAndamento = true;
+    public bool foiParaTB = false;
+    private Jogador sacador = null;
 
     //evento
     public event Action atualizaPlacar;
@@ -19,10 +21,7 @@ namespace TennisScoreDevExpress
     public event Action fimDeJogo;
     //evento
 
-    public Match(
-      Jogador jogador1,
-      Jogador jogador2
-    )
+    public Match(Jogador jogador1, Jogador jogador2)
     {
       this.jogador1 = jogador1;
       this.jogador2 = jogador2;
@@ -64,6 +63,23 @@ namespace TennisScoreDevExpress
     {
       return jogador2.mostrarPonto();
     }
+    private void iguais()
+    {
+      jogador1.indicePonto = 3;
+      jogador2.indicePonto = 3;
+    }
+    public bool jogoEmAndamento()
+    {
+      return _jogoEmAndamento;
+    }
+    public bool jogoFinalizado()
+    {
+      return !jogoEmAndamento();
+    }
+    private bool placar6a6()
+    {
+      return jogador1.game == 6 && jogador2.game == 6;
+    }
     private void fimGame(Jogador vencedorDoGame)
     {
       jogador1.resetPonto();
@@ -72,40 +88,22 @@ namespace TennisScoreDevExpress
       verificaGamesParaTBOuFimSet(vencedorDoGame);
     }
 
-    private void iguais()
-    {
-      jogador1.indicePonto = 3;
-      jogador2.indicePonto = 3;
-    }
-
     private void finalizarJogo()
     {
       fimDeJogo?.Invoke();
       _jogoEmAndamento = false;
     }
-
-    public bool jogoEmAndamento()
-    {
-      return _jogoEmAndamento;
-    }
-
-    public bool jogoFinalizado()
-    {
-      return !jogoEmAndamento();
-    }
     
     private void verificaGamesParaTBOuFimSet(Jogador vencedorDoGame)
     {
-
       Jogador oOutro = vencedorDoGame.numJogador == 1 ? jogador2 : jogador1;
-      
+
       if (vencedorDoGame.game == 6 && oOutro.game <= 4)
       {
         finalizarJogo();
       }
-      
-      if (jogador1.game == 6 && jogador2.game == 6)
-      {
+      if (placar6a6()) {
+        foiParaTB = true;
         iniciaTB?.Invoke();
       }
     }
@@ -114,22 +112,9 @@ namespace TennisScoreDevExpress
     {
       Jogador quemMarcou = null;
       Jogador oOutro = null;
-
-      // faz assign de quem marcou ponto baseado no número do jogador (1 esquerda, 2 direita)
-      switch (numeroDoJogador)
-      {
-        case 1:
-          quemMarcou = jogador1;
-          oOutro = jogador2;
-          break;
-        case 2:
-          quemMarcou = jogador2;
-          oOutro = jogador1;
-          break;
-        default:
-          MessageBox.Show($"Numero do jogador inválido {numeroDoJogador}");
-          break;
-      }
+      (Jogador, Jogador) jogadores = encontraMarcadorEAdversario(numeroDoJogador);
+      quemMarcou = jogadores.Item1;
+      oOutro = jogadores.Item2;
 
       if (quemMarcou.tbPonto >= 7 && oOutro.tbPonto <= 5)
       {
@@ -155,32 +140,20 @@ namespace TennisScoreDevExpress
     {
       Jogador quemMarcou = null;
       Jogador oOutro = null;
-
-      // faz assign de quem marcou ponto baseado no número do jogador (1 esquerda, 2 direita)
-      switch (numeroDoJogador)
-      {
-        case 1:
-          quemMarcou = jogador1;
-          oOutro = jogador2;
-          break;
-        case 2:
-          quemMarcou = jogador2;
-          oOutro = jogador1;
-          break;
-        default:
-          MessageBox.Show($"Numero do jogador inválido {numeroDoJogador}");
-          break;
-      }
+      (Jogador, Jogador) jogadores = encontraMarcadorEAdversario(numeroDoJogador);
+      quemMarcou = jogadores.Item1;
+      oOutro = jogadores.Item2;
 
       quemMarcou.marcarTbPonto();
       verificaFimTB(numeroDoJogador);
     }
-    public void jogadorXMarcarPonto(int numeroDoJogador)
+    private (Jogador, Jogador) encontraMarcadorEAdversario(int numeroDoJogador)
     {
+      // faz assign de quem marcou ponto baseado no número do jogador (1 esquerda, 2 direita)
+
       Jogador quemMarcou = null;
       Jogador oOutro = null;
 
-      // faz assign de quem marcou ponto baseado no número do jogador (1 esquerda, 2 direita)
       switch (numeroDoJogador)
       {
         case 1:
@@ -195,7 +168,16 @@ namespace TennisScoreDevExpress
           MessageBox.Show($"Numero do jogador inválido {numeroDoJogador}");
           break;
       }
+      return (quemMarcou, oOutro);
+    }
 
+    public void jogadorXMarcarPonto(int numeroDoJogador)
+    {
+      Jogador quemMarcou = null;
+      Jogador oOutro = null;
+      (Jogador, Jogador) jogadores = encontraMarcadorEAdversario(numeroDoJogador);
+      quemMarcou = jogadores.Item1;
+      oOutro = jogadores.Item2;
 
       // 0 15 30 40 vantagem
       // 0 1  2  3     4    
