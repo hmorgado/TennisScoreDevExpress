@@ -10,10 +10,16 @@ namespace TennisScoreDevExpress
   {
     public int numJogador;
     public string name;
-    public int indicePonto = 4;
-    public int game = 4;
-    public int tbPonto = 5;
     public bool vencedor = false;
+    private int _TBPonto;
+
+    public int GetTBPonto()
+    {
+      return this._TBPonto;
+    }
+
+    int indicePonto = 4;
+    int game = 4;
 
     string[] pontos = { "0", "15", "30", "40", "vantagem" };
 
@@ -23,10 +29,25 @@ namespace TennisScoreDevExpress
       this.indicePonto = 0;
       this.numJogador = numJogador;
     }
-
+    public int GetIndicePonto()
+    {
+      return indicePonto;
+    }
+    public void SetIndicePonto(int i)
+    {
+      indicePonto = i;
+    }
+    public int GetGame()
+    {
+      return game;
+    }
+    public void SetGame(int i)
+    {
+      game = i;
+    }
     public void marcarPonto() { this.indicePonto++; }
     public void marcarGame(){ this.game++; }
-    public void marcarTbPonto() { this.tbPonto++; }
+    public void marcarTbPonto() { this._TBPonto++; }
     public string mostrarPonto() { return this.pontos[this.indicePonto]; }
     public void resetPonto() { this.indicePonto = 0; }
   }

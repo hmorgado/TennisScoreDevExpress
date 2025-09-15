@@ -39,21 +39,21 @@ namespace TennisScoreDevExpress
     }
     public string gameJogador1()
     {
-      return jogador1.game.ToString();
+      return jogador1.GetGame().ToString();
     }
 
     public string gameJogador2()
     {
-      return jogador2.game.ToString();
+      return jogador2.GetGame().ToString();
     }
 
     public string tbPontoJogador1()
     {
-      return jogador1.tbPonto.ToString();
+      return jogador1.GetTBPonto().ToString();
     }
     public string tbPontoJogador2()
     {
-      return jogador2.tbPonto.ToString();
+      return jogador2.GetTBPonto().ToString();
     }
     public string pontoJogador1()
     {
@@ -65,8 +65,8 @@ namespace TennisScoreDevExpress
     }
     private void iguais()
     {
-      jogador1.indicePonto = 3;
-      jogador2.indicePonto = 3;
+      jogador1.SetIndicePonto(3);
+      jogador2.SetIndicePonto(3);
     }
     public bool jogoEmAndamento()
     {
@@ -78,7 +78,7 @@ namespace TennisScoreDevExpress
     }
     private bool placar6a6()
     {
-      return jogador1.game == 6 && jogador2.game == 6;
+      return jogador1.GetGame() == 6 && jogador2.GetGame() == 6;
     }
     private void fimGame(Jogador vencedorDoGame)
     {
@@ -87,20 +87,17 @@ namespace TennisScoreDevExpress
       vencedorDoGame.marcarGame();
       verificaGamesParaTBOuFimSet(vencedorDoGame);
     }
-
     private void finalizarJogo()
     {
       fimDeJogo?.Invoke();
       _jogoEmAndamento = false;
     }
-
     private bool placar6aXou7a5(Jogador vencedorDoGame)
     {
       Jogador oOutro = vencedorDoGame.numJogador == 1 ? jogador2 : jogador1;
-      return (vencedorDoGame.game == 6 && oOutro.game <= 4) ||
-        (vencedorDoGame.game == 7 && oOutro.game == 5);
+      return (vencedorDoGame.GetGame() == 6 && oOutro.GetGame() <= 4) ||
+        (vencedorDoGame.GetGame() == 7 && oOutro.GetGame() == 5);
     }
-    
     private void verificaGamesParaTBOuFimSet(Jogador vencedorDoGame)
     {
       if (placar6aXou7a5(vencedorDoGame)) { finalizarJogo(); }
@@ -109,7 +106,6 @@ namespace TennisScoreDevExpress
         iniciaTB?.Invoke();
       }
     }
-
     private void verificaFimTB(int numeroDoJogador)
     {
       Jogador quemMarcou = null;
@@ -117,8 +113,7 @@ namespace TennisScoreDevExpress
       (Jogador, Jogador) jogadores = encontraMarcadorEAdversario(numeroDoJogador);
       quemMarcou = jogadores.Item1;
       oOutro = jogadores.Item2;
-
-      if (quemMarcou.tbPonto >= 7 && oOutro.tbPonto <= 5)
+      if (quemMarcou.GetTBPonto() >= 7 && oOutro.GetTBPonto() <= 5)
       {
         quemMarcou.vencedor = true;
         quemMarcou.marcarGame();
@@ -127,8 +122,8 @@ namespace TennisScoreDevExpress
       else
       {
         if (
-          (quemMarcou.tbPonto >=5 && oOutro.tbPonto >= 5) &&
-          (quemMarcou.tbPonto - oOutro.tbPonto == 2)
+          (quemMarcou.GetTBPonto() >=5 && oOutro.GetTBPonto() >= 5) &&
+          (quemMarcou.GetTBPonto() - oOutro.GetTBPonto() == 2)
         )
         {
           quemMarcou.vencedor = true;
@@ -184,11 +179,11 @@ namespace TennisScoreDevExpress
       // 0 15 30 40 vantagem
       // 0 1  2  3     4    
       quemMarcou.marcarPonto();
-      if (oOutro.indicePonto <= 2 && quemMarcou.indicePonto == 4)
+      if (oOutro.GetIndicePonto() <= 2 && quemMarcou.GetIndicePonto() == 4)
         fimGame(quemMarcou);
-      if (oOutro.indicePonto == 3 && quemMarcou.indicePonto == 5)
+      if (oOutro.GetIndicePonto() == 3 && quemMarcou.GetIndicePonto() == 5)
         fimGame(quemMarcou);
-      if (oOutro.indicePonto == 4 && quemMarcou.indicePonto == 4)
+      if (oOutro.GetIndicePonto() == 4 && quemMarcou.GetIndicePonto() == 4)
         iguais();
       atualizaPlacar?.Invoke();
     }
