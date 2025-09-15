@@ -19,8 +19,17 @@ namespace TennisScoreDevExpress.Placar
       InitializeComponent();
 
       this.match = match;
+      match.fimDeJogo += mostrarVencedor;
     }
 
+    private void mostrarVencedor()
+    {
+      atualizaTBPlacar();
+      string nomeVencedor = match.vencedor().name;
+      DialogResult result = MessageBox.Show($"Fim! {nomeVencedor} venceu!");
+      if (result == DialogResult.OK) { this.Close(); }
+    }
+    
     private void atualizaTBPlacar()
     {
       labelTBJogador1.Text = match.tbPontoJogador1();

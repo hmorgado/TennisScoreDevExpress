@@ -12,6 +12,7 @@ namespace TennisScoreDevExpress
     public int indicePonto = 4;
     public int game = 5;
     public int tbPonto;
+    public bool vencedor = false;
 
     string[] pontos = { "0", "15", "30", "40", "vantagem" };
 

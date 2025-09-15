@@ -15,6 +15,7 @@ namespace TennisScoreDevExpress
     //evento
     public event Action atualizaPlacar;
     public event Action iniciaTB;
+    public event Action fimDeJogo;
     //evento
 
     public Match(
@@ -26,6 +27,16 @@ namespace TennisScoreDevExpress
       this.jogador2 = jogador2;
     }
 
+    public Jogador vencedor()
+    {
+      Jogador vencedor = null;
+      if (jogador1.vencedor)
+        vencedor = jogador1;
+      if (jogador2.vencedor)
+        vencedor = jogador2;
+
+      return vencedor;
+    }
     public string gameJogador1()
     {
       return jogador1.game.ToString();
@@ -44,8 +55,6 @@ namespace TennisScoreDevExpress
     {
       return jogador2.tbPonto.ToString();
     }
-
-
     public string pontoJogador1()
     {
       return jogador1.mostrarPonto();
@@ -96,13 +105,8 @@ namespace TennisScoreDevExpress
 
       if (quemMarcou.tbPonto >= 7 && oOutro.tbPonto <= 5)
       {
-        MessageBox.Show($"Fim! vencedor {quemMarcou.name}");
-        // TODO
-        // 1: atualizarTBPlacar antes de mostrar janela de quem ganhou
-        // 2: quando clicar ok no msgBox do vencedor, fechar msgbox e TBplacarForm
-        //  e voltar para PlacarPrincipal mostrando placar do TB de alguma forma
-        // 3: possibilitar ganhar de 7 5
-        // 4: mostrar sacador
+        quemMarcou.vencedor = true;
+        fimDeJogo?.Invoke();
       }
       else
       {
@@ -111,7 +115,8 @@ namespace TennisScoreDevExpress
           (quemMarcou.tbPonto - oOutro.tbPonto == 2)
         )
         {
-          MessageBox.Show($"Fim! ******** vencedor {quemMarcou.name}");
+          quemMarcou.vencedor = true;
+          fimDeJogo?.Invoke();
         }
       }
     }
