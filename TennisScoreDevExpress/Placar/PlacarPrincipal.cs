@@ -1,21 +1,13 @@
 ﻿using DevExpress.XtraEditors;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Windows.Forms;
 using TennisScoreDevExpress.Placar;
 
 namespace TennisScoreDevExpress
 {
   public partial class PlacarPrincipalForm1 : DevExpress.XtraEditors.XtraForm
   {
-    private static Jogador federer = new Jogador("Federer");
-    private static Jogador nadal = new Jogador("Nadal");
+    private static Jogador federer = new Jogador("Federer", 1);
+    private static Jogador nadal = new Jogador("Nadal", 2);
     private Match match = new Match(federer, nadal);
 
     public PlacarPrincipalForm1()
@@ -26,6 +18,13 @@ namespace TennisScoreDevExpress
       // quando game é vencido com Jogador j (vencedor) como param
       match.atualizaPlacar += atualizaPlacar;
       match.iniciaTB += iniciaTBForm;
+      match.fimDeJogo += fimDeJogoForm;
+    }
+
+    private void fimDeJogoForm()
+    {
+      atualizaPlacar();
+      new FimDeJogo().Show();
     }
 
     private void iniciaTBForm()
@@ -44,6 +43,18 @@ namespace TennisScoreDevExpress
       // jog 2
       labelPontoNadal.Text = match.pontoJogador2();
       labelGameNadal.Text = match.gameJogador2();
+
+      btnPontoJogador1.Enabled = match.jogoEmAndamento();
+      btnPontoJogador2.Enabled = match.jogoEmAndamento();
+
+      if (match.jogoFinalizado())
+      {
+        labelTBJogador1.Text = match.tbPontoJogador1();
+        labelTBJogador2.Text = match.tbPontoJogador2();
+
+        labelTBJogador1.Visible = true;
+        labelTBJogador2.Visible = true;
+      }
     }
 
     private void btnPonto_Click(object sender, EventArgs e)

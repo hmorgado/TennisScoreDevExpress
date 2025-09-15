@@ -8,18 +8,20 @@ namespace TennisScoreDevExpress
 {
   public class Jogador
   {
+    public int numJogador;
     public string name;
     public int indicePonto = 4;
-    public int game = 5;
-    public int tbPonto;
+    public int game = 4;
+    public int tbPonto = 5;
     public bool vencedor = false;
 
     string[] pontos = { "0", "15", "30", "40", "vantagem" };
 
-    public Jogador(string name)
+    public Jogador(string name, int numJogador)
     {
       this.name = name;
       this.indicePonto = 0;
+      this.numJogador = numJogador;
     }
 
     public void marcarPonto() { this.indicePonto++; }

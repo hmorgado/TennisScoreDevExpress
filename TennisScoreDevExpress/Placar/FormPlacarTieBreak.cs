@@ -19,21 +19,27 @@ namespace TennisScoreDevExpress.Placar
       InitializeComponent();
 
       this.match = match;
-      match.fimDeJogo += mostrarVencedor;
+      match.fimDeJogo += atualizaTBPlacar;
+      //match.fimDeJogo += mostrarVencedor;
     }
 
-    private void mostrarVencedor()
-    {
-      atualizaTBPlacar();
-      string nomeVencedor = match.vencedor().name;
-      DialogResult result = MessageBox.Show($"Fim! {nomeVencedor} venceu!");
-      if (result == DialogResult.OK) { this.Close(); }
-    }
+    //private void mostrarVencedor()
+    //{
+    //  atualizaTBPlacar();
+    //  string nomeVencedor = match.vencedor().name;
+    //  DialogResult result = MessageBox.Show($"Fim! {nomeVencedor} venceu!");
+    //  if (result == DialogResult.OK) { this.Close(); }
+    //}
     
     private void atualizaTBPlacar()
     {
       labelTBJogador1.Text = match.tbPontoJogador1();
       labelTBJogador2.Text = match.tbPontoJogador2();
+
+      btnPontoTBJogador1.Enabled = match.jogoEmAndamento();
+      btnPontoTBJogador2.Enabled = match.jogoEmAndamento();
+
+      btnTBFechar.Visible = match.jogoFinalizado();
     }
 
     private void btnPontoTB_Click(object sender, EventArgs e)
@@ -41,6 +47,11 @@ namespace TennisScoreDevExpress.Placar
       SimpleButton obj = (SimpleButton)sender;
       match.jogadorXMarcarTBPonto(obj.Name == "btnPontoTBJogador1" ? 1 : 2);
       atualizaTBPlacar();
+    }
+
+    private void btnTBFechar_Click(object sender, EventArgs e)
+    {
+      this.Close();
     }
   }
 }

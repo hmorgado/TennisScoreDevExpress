@@ -36,6 +36,7 @@
       this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
       this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
       this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
+      this.btnTBFechar = new DevExpress.XtraEditors.SimpleButton();
       this.SuspendLayout();
       // 
       // labelControl3
@@ -116,12 +117,23 @@
       this.labelControl4.TabIndex = 16;
       this.labelControl4.Text = "TIE BREAK";
       // 
+      // btnTBFechar
+      // 
+      this.btnTBFechar.Location = new System.Drawing.Point(216, 168);
+      this.btnTBFechar.Name = "btnTBFechar";
+      this.btnTBFechar.Size = new System.Drawing.Size(122, 44);
+      this.btnTBFechar.TabIndex = 17;
+      this.btnTBFechar.Text = "Fechar";
+      this.btnTBFechar.Visible = false;
+      this.btnTBFechar.Click += new System.EventHandler(this.btnTBFechar_Click);
+      // 
       // FormPlacarTieBreak
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
       this.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
       this.ClientSize = new System.Drawing.Size(530, 237);
+      this.Controls.Add(this.btnTBFechar);
       this.Controls.Add(this.labelControl4);
       this.Controls.Add(this.labelControl3);
       this.Controls.Add(this.btnPontoTBJogador1);
@@ -147,5 +159,6 @@
     private DevExpress.XtraEditors.LabelControl labelControl2;
     private DevExpress.XtraEditors.LabelControl labelControl1;
     private DevExpress.XtraEditors.LabelControl labelControl4;
+    private DevExpress.XtraEditors.SimpleButton btnTBFechar;
   }
 }

@@ -11,6 +11,7 @@ namespace TennisScoreDevExpress
   {
     private Jogador jogador1 {  get; set; }
     private Jogador jogador2 {  get; set; }
+    private bool _jogoEmAndamento = true;
 
     //evento
     public event Action atualizaPlacar;
@@ -63,12 +64,12 @@ namespace TennisScoreDevExpress
     {
       return jogador2.mostrarPonto();
     }
-    private void fimGame(Jogador j)
+    private void fimGame(Jogador vencedorDoGame)
     {
       jogador1.resetPonto();
       jogador2.resetPonto();
-      j.marcarGame();
-      verificaGamesParaTB();
+      vencedorDoGame.marcarGame();
+      verificaGamesParaTBOuFimSet(vencedorDoGame);
     }
 
     private void iguais()
@@ -77,9 +78,36 @@ namespace TennisScoreDevExpress
       jogador2.indicePonto = 3;
     }
 
-    private void verificaGamesParaTB()
+    private void finalizarJogo()
     {
-       if (jogador1.game == 6 && jogador2.game == 6) iniciaTB?.Invoke();
+      fimDeJogo?.Invoke();
+      _jogoEmAndamento = false;
+    }
+
+    public bool jogoEmAndamento()
+    {
+      return _jogoEmAndamento;
+    }
+
+    public bool jogoFinalizado()
+    {
+      return !jogoEmAndamento();
+    }
+    
+    private void verificaGamesParaTBOuFimSet(Jogador vencedorDoGame)
+    {
+
+      Jogador oOutro = vencedorDoGame.numJogador == 1 ? jogador2 : jogador1;
+      
+      if (vencedorDoGame.game == 6 && oOutro.game <= 4)
+      {
+        finalizarJogo();
+      }
+      
+      if (jogador1.game == 6 && jogador2.game == 6)
+      {
+        iniciaTB?.Invoke();
+      }
     }
 
     private void verificaFimTB(int numeroDoJogador)
@@ -106,7 +134,8 @@ namespace TennisScoreDevExpress
       if (quemMarcou.tbPonto >= 7 && oOutro.tbPonto <= 5)
       {
         quemMarcou.vencedor = true;
-        fimDeJogo?.Invoke();
+        quemMarcou.marcarGame();
+        finalizarJogo();
       }
       else
       {
@@ -116,7 +145,8 @@ namespace TennisScoreDevExpress
         )
         {
           quemMarcou.vencedor = true;
-          fimDeJogo?.Invoke();
+          quemMarcou.marcarGame();
+          finalizarJogo();
         }
       }
     }
