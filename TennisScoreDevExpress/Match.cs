@@ -34,11 +34,15 @@ namespace TennisScoreDevExpress
       get
       {
         Jogador vencedor = null;
-        if (jogador1.Vencedor)
-          vencedor = jogador1;
-        if (jogador2.Vencedor)
-          vencedor = jogador2;
-
+        if (!jogador1.Vencedor && !jogador2.Vencedor)
+          throw new Exception("Nenhum jogador venceu ainda");
+        else
+        {
+          if (jogador1.Vencedor)
+            vencedor = jogador1;
+          if (jogador2.Vencedor)
+            vencedor = jogador2;
+        }
         return vencedor;
       }
     }
@@ -71,18 +75,9 @@ namespace TennisScoreDevExpress
       jogador1.IndicePonto = 3;
       jogador2.IndicePonto = 3;
     }
-    public bool JogoEmAndamento
-    {
-      get => _jogoEmAndamento;
-    }
-    public bool jogoFinalizado()
-    {
-      return !JogoEmAndamento;
-    }
-    private bool placar6a6()
-    {
-      return jogador1.Game == 6 && jogador2.Game == 6;
-    }
+    public bool JogoEmAndamento { get => _jogoEmAndamento; }
+    public bool jogoFinalizado() { return !JogoEmAndamento; }
+    private bool placar6a6() { return jogador1.Game == 6 && jogador2.Game == 6; }
     private void fimGame(Jogador vencedorDoGame)
     {
       jogador1.resetPonto();
@@ -95,15 +90,16 @@ namespace TennisScoreDevExpress
       fimDeJogo?.Invoke();
       _jogoEmAndamento = false;
     }
-    private bool placar6aXou7a5(Jogador vencedorDoGame)
+    private bool placar6a01234ou7a5(Jogador vencedorDoGame)
     {
+      // Melhor forma de descobrir quemMarcou e oOutro
       Jogador oOutro = vencedorDoGame.NumJogador == 1 ? jogador2 : jogador1;
       return (vencedorDoGame.Game == 6 && oOutro.Game <= 4) ||
         (vencedorDoGame.Game == 7 && oOutro.Game == 5);
     }
     private void verificaGamesParaTBOuFimSet(Jogador vencedorDoGame)
     {
-      if (placar6aXou7a5(vencedorDoGame)) { finalizarJogo(); }
+      if (placar6a01234ou7a5(vencedorDoGame)) { finalizarJogo(); }
       if (placar6a6()) {
         _foiParaTB = true;
         iniciaTB?.Invoke();
@@ -111,11 +107,8 @@ namespace TennisScoreDevExpress
     }
     private void verificaFimTB(int numeroDoJogador)
     {
-      Jogador quemMarcou = null;
-      Jogador oOutro = null;
-      (Jogador, Jogador) jogadores = encontraMarcadorEAdversario(numeroDoJogador);
-      quemMarcou = jogadores.Item1;
-      oOutro = jogadores.Item2;
+      (Jogador quemMarcou, Jogador oOutro) = encontraMarcadorEAdversario(numeroDoJogador);
+
       if (quemMarcou.TBPonto >= 7 && oOutro.TBPonto <= 5)
       {
         quemMarcou.Vencedor = true;
@@ -125,6 +118,7 @@ namespace TennisScoreDevExpress
       else
       {
         if (
+          // pontos no TB acima de 5-5 e diferença entre pontos é = 2
           (quemMarcou.TBPonto >=5 && oOutro.TBPonto >= 5) &&
           (quemMarcou.TBPonto - oOutro.TBPonto == 2)
         )
@@ -138,22 +132,19 @@ namespace TennisScoreDevExpress
 
     public void jogadorXMarcarTBPonto(int numeroDoJogador)
     {
-      Jogador quemMarcou = null;
-      Jogador oOutro = null;
-      (Jogador, Jogador) jogadores = encontraMarcadorEAdversario(numeroDoJogador);
-      quemMarcou = jogadores.Item1;
-      oOutro = jogadores.Item2;
+      Jogador quemMarcou = encontraMarcadorEAdversario(numeroDoJogador).Item1;
 
       quemMarcou.marcarTbPonto();
       verificaFimTB(numeroDoJogador);
     }
+
+    // Segunda melhor forma de descobrir quemMarcou e oOutro
+    // Aqui só temos o int numeroDoJogador que veio do botao do form
     private (Jogador, Jogador) encontraMarcadorEAdversario(int numeroDoJogador)
     {
       // faz assign de quem marcou ponto baseado no número do jogador (1 esquerda, 2 direita)
-
       Jogador quemMarcou = null;
       Jogador oOutro = null;
-
       switch (numeroDoJogador)
       {
         case 1:
@@ -173,11 +164,7 @@ namespace TennisScoreDevExpress
 
     public void jogadorXMarcarPonto(int numeroDoJogador)
     {
-      Jogador quemMarcou = null;
-      Jogador oOutro = null;
-      (Jogador, Jogador) jogadores = encontraMarcadorEAdversario(numeroDoJogador);
-      quemMarcou = jogadores.Item1;
-      oOutro = jogadores.Item2;
+      (Jogador quemMarcou, Jogador oOutro) = encontraMarcadorEAdversario(numeroDoJogador);
 
       // 0 15 30 40 vantagem
       // 0 1  2  3     4    
