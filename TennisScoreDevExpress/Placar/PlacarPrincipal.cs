@@ -17,6 +17,9 @@ namespace TennisScoreDevExpress
       // chama método atualizaPlacar DESTA CLASSE
       // quando game é vencido com Jogador j (vencedor) como param
       atualizaPlacar();
+      labelJogador1Nome.Text = j1.Nome;
+      labelJogador2Nome.Text = j2.Nome;
+
       match.atualizaPlacar += atualizaPlacar;
       match.iniciaTB += iniciaTBForm;
       match.fimDeJogo += fimDeJogoForm;
@@ -37,16 +40,16 @@ namespace TennisScoreDevExpress
 
     private void atualizaPlacar()
     {
-      labelJogador1Nome.Text = j1.Nome;
-      labelJogador2Nome.Text = j2.Nome;
-      
       // jog 1
-      labelGameFederer.Text = match.gameJogador1();
-      labelPontoFederer.Text = match.pontoJogador1();
-
+      labelGameJogador1.Text = match.gameJogador1();
+      labelPontoJogador1.Text = match.pontoJogador1();
+      
       // jog 2
-      labelPontoNadal.Text = match.pontoJogador2();
-      labelGameNadal.Text = match.gameJogador2();
+      labelPontoJogador2.Text = match.pontoJogador2();
+      labelGameJogador2.Text = match.gameJogador2();
+
+      labelTotalPontosJogador1.Text = match.Jogador1TotalPontos;
+      labelTotalPontosJogador2.Text = match.Jogador2TotalPontos;
 
       btnPontoJogador1.Enabled = match.JogoEmAndamento;
       btnPontoJogador2.Enabled = match.JogoEmAndamento;

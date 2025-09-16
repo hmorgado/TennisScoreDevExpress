@@ -33,8 +33,8 @@
       this.btnPontoTBJogador2 = new DevExpress.XtraEditors.SimpleButton();
       this.labelTBJogador1 = new DevExpress.XtraEditors.LabelControl();
       this.labelTBJogador2 = new DevExpress.XtraEditors.LabelControl();
-      this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
-      this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
+      this.labelTBNomeJogador1 = new DevExpress.XtraEditors.LabelControl();
+      this.labelTBNomeJogador2 = new DevExpress.XtraEditors.LabelControl();
       this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
       this.btnTBFechar = new DevExpress.XtraEditors.SimpleButton();
       this.SuspendLayout();
@@ -87,25 +87,25 @@
       this.labelTBJogador2.TabIndex = 11;
       this.labelTBJogador2.Text = "0";
       // 
-      // labelControl2
+      // labelTBNomeJogador1
       // 
-      this.labelControl2.Appearance.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.labelControl2.Appearance.Options.UseFont = true;
-      this.labelControl2.Location = new System.Drawing.Point(73, 89);
-      this.labelControl2.Name = "labelControl2";
-      this.labelControl2.Size = new System.Drawing.Size(91, 33);
-      this.labelControl2.TabIndex = 10;
-      this.labelControl2.Text = "Federer";
+      this.labelTBNomeJogador1.Appearance.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.labelTBNomeJogador1.Appearance.Options.UseFont = true;
+      this.labelTBNomeJogador1.Location = new System.Drawing.Point(73, 89);
+      this.labelTBNomeJogador1.Name = "labelTBNomeJogador1";
+      this.labelTBNomeJogador1.Size = new System.Drawing.Size(91, 33);
+      this.labelTBNomeJogador1.TabIndex = 10;
+      this.labelTBNomeJogador1.Text = "Federer";
       // 
-      // labelControl1
+      // labelTBNomeJogador2
       // 
-      this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-      this.labelControl1.Appearance.Options.UseFont = true;
-      this.labelControl1.Location = new System.Drawing.Point(400, 89);
-      this.labelControl1.Name = "labelControl1";
-      this.labelControl1.Size = new System.Drawing.Size(67, 33);
-      this.labelControl1.TabIndex = 9;
-      this.labelControl1.Text = "Nadal";
+      this.labelTBNomeJogador2.Appearance.Font = new System.Drawing.Font("Tahoma", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.labelTBNomeJogador2.Appearance.Options.UseFont = true;
+      this.labelTBNomeJogador2.Location = new System.Drawing.Point(400, 89);
+      this.labelTBNomeJogador2.Name = "labelTBNomeJogador2";
+      this.labelTBNomeJogador2.Size = new System.Drawing.Size(67, 33);
+      this.labelTBNomeJogador2.TabIndex = 9;
+      this.labelTBNomeJogador2.Text = "Nadal";
       // 
       // labelControl4
       // 
@@ -140,8 +140,8 @@
       this.Controls.Add(this.btnPontoTBJogador2);
       this.Controls.Add(this.labelTBJogador1);
       this.Controls.Add(this.labelTBJogador2);
-      this.Controls.Add(this.labelControl2);
-      this.Controls.Add(this.labelControl1);
+      this.Controls.Add(this.labelTBNomeJogador1);
+      this.Controls.Add(this.labelTBNomeJogador2);
       this.Name = "FormPlacarTieBreak";
       this.Text = "Tie Break";
       this.ResumeLayout(false);
@@ -156,8 +156,8 @@
     private DevExpress.XtraEditors.SimpleButton btnPontoTBJogador2;
     private DevExpress.XtraEditors.LabelControl labelTBJogador1;
     private DevExpress.XtraEditors.LabelControl labelTBJogador2;
-    private DevExpress.XtraEditors.LabelControl labelControl2;
-    private DevExpress.XtraEditors.LabelControl labelControl1;
+    private DevExpress.XtraEditors.LabelControl labelTBNomeJogador1;
+    private DevExpress.XtraEditors.LabelControl labelTBNomeJogador2;
     private DevExpress.XtraEditors.LabelControl labelControl4;
     private DevExpress.XtraEditors.SimpleButton btnTBFechar;
   }

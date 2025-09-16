@@ -24,6 +24,9 @@ namespace TennisScoreDevExpress
       this._sacador = (sacador == 1) ? jogador1 : jogador2;
     }
 
+    public string Jogador1TotalPontos { get => jogador1.TotalDePontos; }
+    public string Jogador2TotalPontos { get => jogador2.TotalDePontos; }
+    
     public bool Jogador1Sacando() { return _sacador.NumJogador == 1; }
     public bool Jogador2Sacando() { return _sacador.NumJogador == 2; }
 
@@ -50,6 +53,8 @@ namespace TennisScoreDevExpress
         return vencedor;
       }
     }
+    public string NomeJogador1 { get => jogador1.Nome; }
+    public string NomeJogador2 { get => jogador2.Nome; }
     public string gameJogador1()
     {
       return jogador1.Game.ToString();
@@ -76,17 +81,13 @@ namespace TennisScoreDevExpress
     }
     private void iguais()
     {
-      jogador1.IndicePonto = 3;
-      jogador2.IndicePonto = 3;
+      jogador1.voltarPara40();
+      jogador2.voltarPara40();
     }
     public bool JogoEmAndamento { get => _jogoEmAndamento; }
     public bool jogoFinalizado() { return !JogoEmAndamento; }
     private bool placar6a6() { return jogador1.Game == 6 && jogador2.Game == 6; }
-    
-    private void alternaSacador()
-    {
-      this._sacador = this._sacador.NumJogador == 1 ? jogador2 : jogador1;
-    }
+    private void alternaSacador() { this._sacador = this._sacador.NumJogador == 1 ? jogador2 : jogador1; }
     private void fimGame(Jogador vencedorDoGame)
     {
       jogador1.resetPonto();
@@ -145,6 +146,7 @@ namespace TennisScoreDevExpress
       Jogador quemMarcou = encontraMarcadorEAdversario(numeroDoJogador).Item1;
 
       quemMarcou.marcarTbPonto();
+      atualizaPlacar?.Invoke();
       verificaFimTB(numeroDoJogador);
     }
 

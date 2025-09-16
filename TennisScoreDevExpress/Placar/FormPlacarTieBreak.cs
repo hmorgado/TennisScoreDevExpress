@@ -14,12 +14,16 @@ namespace TennisScoreDevExpress.Placar
   public partial class FormPlacarTieBreak : Form
   {
     Match match;
+
     public FormPlacarTieBreak(Match match)
     {
       InitializeComponent();
 
       this.match = match;
       match.fimDeJogo += atualizaTBPlacar;
+      
+      labelTBNomeJogador1.Text = match.NomeJogador1;
+      labelTBNomeJogador2.Text = match.NomeJogador2;
     }
     
     private void atualizaTBPlacar()

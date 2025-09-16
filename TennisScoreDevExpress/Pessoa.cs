@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TennisScoreDevExpress
 {
-  public class Pessoa
+  public abstract class Pessoa
   {
     private string _name { get; set; }
     
