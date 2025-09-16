@@ -8,7 +8,7 @@ namespace TennisScoreDevExpress
   {
     private static Jogador j1 = new Jogador("Heitor", 1);
     private static Jogador j2 = new Jogador("João", 2);
-    private Match match = new Match(j1, j2);
+    private Match match = new Match(j1, j2, sacador: 2);
 
     public PlacarPrincipalForm1()
     {
@@ -51,10 +51,16 @@ namespace TennisScoreDevExpress
       btnPontoJogador1.Enabled = match.JogoEmAndamento;
       btnPontoJogador2.Enabled = match.JogoEmAndamento;
 
+      labelSacandoJogador1.Visible = match.Jogador1Sacando();
+      labelSacandoJogador2.Visible = match.Jogador2Sacando();
+      
       if (match.jogoFinalizado() && match.FoiParaTB)
       {
         labelTBJogador1.Text = match.tbPontoJogador1();
         labelTBJogador2.Text = match.tbPontoJogador2();
+
+        labelSacandoJogador1.Visible = false;
+        labelSacandoJogador2.Visible = false;
 
         labelTBJogador1.Visible = true;
         labelTBJogador2.Visible = true;

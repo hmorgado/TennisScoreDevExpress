@@ -9,7 +9,7 @@ namespace TennisScoreDevExpress
     private Jogador jogador2 { get; set; }
     private bool _jogoEmAndamento = true;
     private bool _foiParaTB = false;
-    private Jogador sacador = null;
+    private Jogador _sacador;
 
     //evento
     public event Action atualizaPlacar;
@@ -17,11 +17,15 @@ namespace TennisScoreDevExpress
     public event Action fimDeJogo;
     //evento
 
-    public Match(Jogador jogador1, Jogador jogador2)
+    public Match(Jogador jogador1, Jogador jogador2, int sacador = 1)
     {
       this.jogador1 = jogador1;
       this.jogador2 = jogador2;
+      this._sacador = (sacador == 1) ? jogador1 : jogador2;
     }
+
+    public bool Jogador1Sacando() { return _sacador.NumJogador == 1; }
+    public bool Jogador2Sacando() { return _sacador.NumJogador == 2; }
 
     public bool FoiParaTB
     {
@@ -78,11 +82,17 @@ namespace TennisScoreDevExpress
     public bool JogoEmAndamento { get => _jogoEmAndamento; }
     public bool jogoFinalizado() { return !JogoEmAndamento; }
     private bool placar6a6() { return jogador1.Game == 6 && jogador2.Game == 6; }
+    
+    private void alternaSacador()
+    {
+      this._sacador = this._sacador.NumJogador == 1 ? jogador2 : jogador1;
+    }
     private void fimGame(Jogador vencedorDoGame)
     {
       jogador1.resetPonto();
       jogador2.resetPonto();
       vencedorDoGame.marcarGame();
+      alternaSacador();
       verificaGamesParaTBOuFimSet(vencedorDoGame);
     }
     private void finalizarJogo()
