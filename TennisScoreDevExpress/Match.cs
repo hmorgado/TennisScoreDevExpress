@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace TennisScoreDevExpress
@@ -27,19 +23,24 @@ namespace TennisScoreDevExpress
       this.jogador2 = jogador2;
     }
 
-    public bool getFoiParaTB()
+    public bool FoiParaTB
     {
-      return this._foiParaTB;
+      get { return _foiParaTB; }
+      set { _foiParaTB = value; }
     }
-    public Jogador vencedor()
-    {
-      Jogador vencedor = null;
-      if (jogador1.vencedor)
-        vencedor = jogador1;
-      if (jogador2.vencedor)
-        vencedor = jogador2;
 
-      return vencedor;
+    public Jogador Vencedor
+    {
+      get
+      {
+        Jogador vencedor = null;
+        if (jogador1.Vencedor)
+          vencedor = jogador1;
+        if (jogador2.Vencedor)
+          vencedor = jogador2;
+
+        return vencedor;
+      }
     }
     public string gameJogador1()
     {
@@ -51,11 +52,11 @@ namespace TennisScoreDevExpress
     }
     public string tbPontoJogador1()
     {
-      return jogador1.GetTBPonto().ToString();
+      return jogador1.TBPonto.ToString();
     }
     public string tbPontoJogador2()
     {
-      return jogador2.GetTBPonto().ToString();
+      return jogador2.TBPonto.ToString();
     }
     public string pontoJogador1()
     {
@@ -67,8 +68,8 @@ namespace TennisScoreDevExpress
     }
     private void iguais()
     {
-      jogador1.SetIndicePonto(3);
-      jogador2.SetIndicePonto(3);
+      jogador1.IndicePonto = 3;
+      jogador2.IndicePonto = 3;
     }
     public bool JogoEmAndamento
     {
@@ -115,20 +116,20 @@ namespace TennisScoreDevExpress
       (Jogador, Jogador) jogadores = encontraMarcadorEAdversario(numeroDoJogador);
       quemMarcou = jogadores.Item1;
       oOutro = jogadores.Item2;
-      if (quemMarcou.GetTBPonto() >= 7 && oOutro.GetTBPonto() <= 5)
+      if (quemMarcou.TBPonto >= 7 && oOutro.TBPonto <= 5)
       {
-        quemMarcou.vencedor = true;
+        quemMarcou.Vencedor = true;
         quemMarcou.marcarGame();
         finalizarJogo();
       }
       else
       {
         if (
-          (quemMarcou.GetTBPonto() >=5 && oOutro.GetTBPonto() >= 5) &&
-          (quemMarcou.GetTBPonto() - oOutro.GetTBPonto() == 2)
+          (quemMarcou.TBPonto >=5 && oOutro.TBPonto >= 5) &&
+          (quemMarcou.TBPonto - oOutro.TBPonto == 2)
         )
         {
-          quemMarcou.vencedor = true;
+          quemMarcou.Vencedor = true;
           quemMarcou.marcarGame();
           finalizarJogo();
         }
@@ -181,11 +182,11 @@ namespace TennisScoreDevExpress
       // 0 15 30 40 vantagem
       // 0 1  2  3     4    
       quemMarcou.marcarPonto();
-      if (oOutro.GetIndicePonto() <= 2 && quemMarcou.GetIndicePonto() == 4)
+      if (oOutro.IndicePonto <= 2 && quemMarcou.IndicePonto == 4)
         fimGame(quemMarcou);
-      if (oOutro.GetIndicePonto() == 3 && quemMarcou.GetIndicePonto() == 5)
+      if (oOutro.IndicePonto == 3 && quemMarcou.IndicePonto == 5)
         fimGame(quemMarcou);
-      if (oOutro.GetIndicePonto() == 4 && quemMarcou.GetIndicePonto() == 4)
+      if (oOutro.IndicePonto == 4 && quemMarcou.IndicePonto == 4)
         iguais();
       atualizaPlacar?.Invoke();
     }

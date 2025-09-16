@@ -51,7 +51,7 @@ namespace TennisScoreDevExpress
       btnPontoJogador1.Enabled = match.JogoEmAndamento;
       btnPontoJogador2.Enabled = match.JogoEmAndamento;
 
-      if (match.jogoFinalizado() && match.getFoiParaTB())
+      if (match.jogoFinalizado() && match.FoiParaTB)
       {
         labelTBJogador1.Text = match.tbPontoJogador1();
         labelTBJogador2.Text = match.tbPontoJogador2();
