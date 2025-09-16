@@ -43,11 +43,11 @@ namespace TennisScoreDevExpress
     }
     public string gameJogador1()
     {
-      return jogador1.GetGame().ToString();
+      return jogador1.Game.ToString();
     }
     public string gameJogador2()
     {
-      return jogador2.GetGame().ToString();
+      return jogador2.Game.ToString();
     }
     public string tbPontoJogador1()
     {
@@ -70,17 +70,17 @@ namespace TennisScoreDevExpress
       jogador1.SetIndicePonto(3);
       jogador2.SetIndicePonto(3);
     }
-    public bool jogoEmAndamento()
+    public bool JogoEmAndamento
     {
-      return _jogoEmAndamento;
+      get => _jogoEmAndamento;
     }
     public bool jogoFinalizado()
     {
-      return !jogoEmAndamento();
+      return !JogoEmAndamento;
     }
     private bool placar6a6()
     {
-      return jogador1.GetGame() == 6 && jogador2.GetGame() == 6;
+      return jogador1.Game == 6 && jogador2.Game == 6;
     }
     private void fimGame(Jogador vencedorDoGame)
     {
@@ -96,9 +96,9 @@ namespace TennisScoreDevExpress
     }
     private bool placar6aXou7a5(Jogador vencedorDoGame)
     {
-      Jogador oOutro = vencedorDoGame.numJogador == 1 ? jogador2 : jogador1;
-      return (vencedorDoGame.GetGame() == 6 && oOutro.GetGame() <= 4) ||
-        (vencedorDoGame.GetGame() == 7 && oOutro.GetGame() == 5);
+      Jogador oOutro = vencedorDoGame.NumJogador == 1 ? jogador2 : jogador1;
+      return (vencedorDoGame.Game == 6 && oOutro.Game <= 4) ||
+        (vencedorDoGame.Game == 7 && oOutro.Game == 5);
     }
     private void verificaGamesParaTBOuFimSet(Jogador vencedorDoGame)
     {

@@ -6,30 +6,25 @@ using System.Threading.Tasks;
 
 namespace TennisScoreDevExpress
 {
-  public class Jogador
+  public class Jogador : Pessoa
   {
-    public int numJogador;
+    private int _numJogador;
     public bool vencedor = false;
 
-    private string _name;
     private int _TBPonto;
     private int _indicePonto = 4;
     private int _game = 4;
 
-
-
     string[] pontos = { "0", "15", "30", "40", "vantagem" };
 
-    public Jogador(string nome, int numJogador)
+    public Jogador(string nome, int numJogador) : base(nome)
     {
-      this._name = nome;
       this._indicePonto = 0;
-      this.numJogador = numJogador;
+      this._numJogador = numJogador;
     }
-    public string GetNome()
-    {
-      return _name;
-    }
+    public int NumJogador { get => this._numJogador; }
+
+    public string Nome { get => base.Name; }
 
     public int GetTBPonto()
     {
@@ -43,9 +38,9 @@ namespace TennisScoreDevExpress
     {
       _indicePonto = i;
     }
-    public int GetGame()
+    public int Game
     {
-      return _game;
+      get => _game;
     }
     public void marcarPonto() { this._indicePonto++; }
     public void marcarGame(){ this._game++; }

@@ -27,8 +27,8 @@ namespace TennisScoreDevExpress.Placar
       labelTBJogador1.Text = match.tbPontoJogador1();
       labelTBJogador2.Text = match.tbPontoJogador2();
 
-      btnPontoTBJogador1.Enabled = match.jogoEmAndamento();
-      btnPontoTBJogador2.Enabled = match.jogoEmAndamento();
+      btnPontoTBJogador1.Enabled = match.JogoEmAndamento;
+      btnPontoTBJogador2.Enabled = match.JogoEmAndamento;
 
       btnTBFechar.Visible = match.jogoFinalizado();
     }
